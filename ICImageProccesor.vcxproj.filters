@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>qrc;rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{5662d94f-95e4-471f-9be0-b5c9023a4e43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LogicalGates">
+      <UniqueIdentifier>{545198d1-00b9-45af-bd81-07f761f56180}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{066da104-9b36-492c-bf1c-224cd5379d06}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="ICImageProccesor.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <QtUic Include="ICImageProccesor.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Core\ImageParser.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\ICDesigner.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ICImageProccesor.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="LogicalGates\AndGate.cpp">
+      <Filter>LogicalGates</Filter>
+    </ClCompile>
+    <ClCompile Include="LogicalGates\OrGate.cpp">
+      <Filter>LogicalGates</Filter>
+    </ClCompile>
+    <ClCompile Include="LogicalGates\XorGate.cpp">
+      <Filter>LogicalGates</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="Core\ICDesigner.h">
+      <Filter>Core</Filter>
+    </QtMoc>
+    <QtMoc Include="ICImageProccesor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\ImageParser.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\IParser.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="LogicalGates\LogicGate.h">
+      <Filter>LogicalGates</Filter>
+    </ClInclude>
+    <ClInclude Include="LogicalGates\AndGate.h">
+      <Filter>LogicalGates</Filter>
+    </ClInclude>
+    <ClInclude Include="LogicalGates\OrGate.h">
+      <Filter>LogicalGates</Filter>
+    </ClInclude>
+    <ClInclude Include="LogicalGates\XorGate.h">
+      <Filter>LogicalGates</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\And.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Nand.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Nor.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Or.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Xnor.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Xor.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
