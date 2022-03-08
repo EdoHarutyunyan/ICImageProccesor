@@ -1,1 +1,6 @@
-#include "AndGate.h"
+#include "OrGate.h"
+
+namespace gate
+{
+
+} // namespace gate

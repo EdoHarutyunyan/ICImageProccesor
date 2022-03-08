@@ -1,5 +1,7 @@
 #include "Gate.h"
 
+namespace gate
+{
 
 Gate::Gate(const QImage& image) : m_image(image)
 {
@@ -57,3 +59,5 @@ double Gate::GetHeight() const
 {
 	return m_height;
 }
+
+} // namespace gate

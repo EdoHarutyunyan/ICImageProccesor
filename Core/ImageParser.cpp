@@ -11,6 +11,9 @@
 #include "../LogicalGates/OrGate.h"
 #include "../LogicalGates/XorGate.h"
 
+namespace parser
+{
+
 ImageParser::ImageParser(const std::string& path)
 	: m_path(path)
 {
@@ -42,7 +45,7 @@ void ImageParser::DetectGates()
 	// Read lines into vector
 	std::vector<std::string> fileLines;
 
-	std::map<std::string, Gate*> gatesMap =
+	std::map<std::string, gate::Gate*> gatesMap =
 	{
 		//const QPoint& top,
 		//const QPoint& left,
@@ -103,4 +106,4 @@ void ImageParser::DetectLines()
 	}
 }
 
-
+} // namespace parser

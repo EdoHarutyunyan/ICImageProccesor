@@ -4,7 +4,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    ICImageProccesor w;
+    icimageproccesor::ICImageProccesor icImageProccesor;
 
     return a.exec();
 }

@@ -1,1 +1,5 @@
-#include "AndGate.h"
+#include "XorGate.h"
+
+namespace gate
+{
+} // namespace gate

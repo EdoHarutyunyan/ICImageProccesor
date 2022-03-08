@@ -1,4 +1,5 @@
 #include "ICDesigner.h"
+
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGridLayout>
@@ -7,6 +8,9 @@
 #include <QtWidgets/qfiledialog.h>
 
 #include "../Core/ImageParser.h"
+
+namespace icdesigner
+{
 
 ICDesigner::ICDesigner(QWidget* parent)
 	: QWidget(parent)
@@ -67,7 +71,8 @@ void ICDesigner::on_importButton_released()
 	//QString fileName = QFileDialog::getOpenFileName(this, "Open a file", QDir::homePath());
 
 	// ToDo: file path should be input parameter
-	m_parser = new ImageParser("C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\lines.png");
-
+	m_parser = std::make_shared<parser::ImageParser>("C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\lines.png");
 	m_parser->Start();
 }
+
+} // namespace icdesigner

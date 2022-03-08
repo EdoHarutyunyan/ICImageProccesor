@@ -3,11 +3,14 @@
 #include <vector>
 
 #include "../LogicalGates/Gate.h"
+#include "IParser.h"
 
 class QGraphicsView;
 class QGraphicsScene;
 class QPushButton;
-class IParser;
+
+namespace icdesigner
+{
 
 class ICDesigner : public QWidget
 {
@@ -16,7 +19,6 @@ class ICDesigner : public QWidget
 public:
 	explicit ICDesigner(QWidget* parent = nullptr);
 	~ICDesigner() = default;
-private:
 
 public slots:
 
@@ -28,11 +30,13 @@ public:
 	void Display();
 
 private:
-	IParser* m_parser;
+	parser::ParserSharedPtr m_parser{ nullptr };
+	std::vector<gate::GateSharedPtr> m_gates;
 	QGraphicsView* m_graphicsView;
 	QGraphicsScene* m_scene;
 	QPushButton* m_importButton;
 	QPushButton* m_exportButton;
-	std::vector<Gate*> m_gates;
 };
+
+} // namespace icdesigner
 

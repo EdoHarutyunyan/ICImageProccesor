@@ -7,6 +7,9 @@
 
 class QPushButton;
 
+namespace parser
+{
+
 class ImageParser : public IParser
 {
 public:
@@ -20,3 +23,5 @@ private:
 private:
 	std::string m_path;
 };
+
+} // namespace parser

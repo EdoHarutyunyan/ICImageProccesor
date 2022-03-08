@@ -2,6 +2,9 @@
 
 #include "Gate.h"
 
+namespace gate
+{
+
 class AndGate : public Gate
 {
 public:
@@ -14,3 +17,5 @@ public:
 	{
 	}
 };
+
+} // namespace gate

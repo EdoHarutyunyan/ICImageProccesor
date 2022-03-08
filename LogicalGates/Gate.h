@@ -1,6 +1,11 @@
 #pragma once
+#include <iostream>
+
 #include <QPoint.h>
 #include <QImage.h>
+
+namespace gate
+{
 
 class Gate
 {
@@ -30,3 +35,7 @@ protected:
 	double m_height{ 0.0 };
 	QImage m_image;
 };
+
+using GateSharedPtr = std::shared_ptr<Gate>;
+
+} // namespace gate
