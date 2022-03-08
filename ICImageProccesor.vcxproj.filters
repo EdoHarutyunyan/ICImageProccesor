@@ -45,6 +45,12 @@
     <ClCompile Include="LogicalGates\XorGate.cpp">
       <Filter>LogicalGates</Filter>
     </ClCompile>
+    <ClCompile Include="LogicalGates\Gate.cpp">
+      <Filter>LogicalGates</Filter>
+    </ClCompile>
+    <ClCompile Include="LogicalGates\NorGate.cpp">
+      <Filter>LogicalGates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Core\ICDesigner.h">
@@ -59,7 +65,7 @@
     <ClInclude Include="Core\IParser.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="LogicalGates\LogicGate.h">
+    <ClInclude Include="LogicalGates\Gate.h">
       <Filter>LogicalGates</Filter>
     </ClInclude>
     <ClInclude Include="LogicalGates\AndGate.h">
@@ -69,6 +75,9 @@
       <Filter>LogicalGates</Filter>
     </ClInclude>
     <ClInclude Include="LogicalGates\XorGate.h">
+      <Filter>LogicalGates</Filter>
+    </ClInclude>
+    <ClInclude Include="LogicalGates\NorGate.h">
       <Filter>LogicalGates</Filter>
     </ClInclude>
   </ItemGroup>

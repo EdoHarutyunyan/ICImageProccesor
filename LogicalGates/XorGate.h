@@ -1,8 +1,8 @@
 #pragma once
 
-#include "LogicGate.h"
+#include "Gate.h"
 
-class XorGate : public LogicGate
+class XorGate : public Gate
 {
 
 };

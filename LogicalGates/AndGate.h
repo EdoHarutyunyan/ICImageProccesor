@@ -1,8 +1,16 @@
 #pragma once
 
-#include "LogicGate.h"
+#include "Gate.h"
 
-class AndGate : public LogicGate
+class AndGate : public Gate
 {
-
+public:
+	AndGate(const QPoint& top,
+		const QPoint& left,
+		const double width,
+		const double height,
+		const QImage& image)
+		: Gate(top, left, width, height, image)
+	{
+	}
 };

@@ -94,6 +94,8 @@
   <ItemGroup>
     <ClCompile Include="ICImageProccesor.cpp" />
     <ClCompile Include="LogicalGates\AndGate.cpp" />
+    <ClCompile Include="LogicalGates\Gate.cpp" />
+    <ClCompile Include="LogicalGates\NorGate.cpp" />
     <ClCompile Include="LogicalGates\OrGate.cpp" />
     <ClCompile Include="LogicalGates\XorGate.cpp" />
     <ClCompile Include="main.cpp" />
@@ -104,7 +106,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LogicalGates\AndGate.h" />
-    <ClInclude Include="LogicalGates\LogicGate.h" />
+    <ClInclude Include="LogicalGates\Gate.h" />
+    <ClInclude Include="LogicalGates\NorGate.h" />
     <ClInclude Include="LogicalGates\OrGate.h" />
     <ClInclude Include="LogicalGates\XorGate.h" />
     <QtMoc Include="ICImageProccesor.h" />
