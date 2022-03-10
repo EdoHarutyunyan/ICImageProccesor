@@ -64,6 +64,9 @@
     <Link>
       <AdditionalDependencies>opencv_world453d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ClCompile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
@@ -93,11 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ICImageProccesor.cpp" />
-    <ClCompile Include="LogicalGates\AndGate.cpp" />
     <ClCompile Include="LogicalGates\Gate.cpp" />
-    <ClCompile Include="LogicalGates\NorGate.cpp" />
-    <ClCompile Include="LogicalGates\OrGate.cpp" />
-    <ClCompile Include="LogicalGates\XorGate.cpp" />
     <ClCompile Include="main.cpp" />
     <QtRcc Include="ICImageProccesor.qrc" />
     <QtUic Include="ICImageProccesor.ui" />
@@ -105,11 +104,7 @@
     <ClCompile Include="Core\ImageParser.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LogicalGates\AndGate.h" />
     <ClInclude Include="LogicalGates\Gate.h" />
-    <ClInclude Include="LogicalGates\NorGate.h" />
-    <ClInclude Include="LogicalGates\OrGate.h" />
-    <ClInclude Include="LogicalGates\XorGate.h" />
     <QtMoc Include="ICImageProccesor.h" />
     <QtMoc Include="Core\ICDesigner.h" />
     <ClInclude Include="Core\ImageParser.h" />

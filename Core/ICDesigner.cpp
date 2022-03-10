@@ -37,14 +37,9 @@ ICDesigner::ICDesigner(QWidget* parent)
 
 void ICDesigner::Test()
 {
-	QPixmap pixmap;
-	pixmap.load("C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\And.jpg");
-	pixmap.size();
+	QRect rect(QPoint(0, 0), QSize(128, 72));
 
-	QRect rect(QPoint(0, 0), QSize(500, 500));
-
-
-	QImage image(rect.size(), QImage::Format::Format_Mono);
+	QImage image;
 	image.load("C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\And.jpg");
 	auto newImg = image.scaled(rect.size());
 	//QRect rect(QPoint(0, 0), image.size());
@@ -73,6 +68,9 @@ void ICDesigner::on_importButton_released()
 	// ToDo: file path should be input parameter
 	m_parser = std::make_shared<parser::ImageParser>("C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\lines.png");
 	m_parser->Start();
+
+	// private
+	Display();
 }
 
 } // namespace icdesigner

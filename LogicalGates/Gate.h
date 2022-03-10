@@ -15,20 +15,20 @@ public:
 	Gate(const QPoint& top, const QPoint& left,
 		double width, double height, const QImage& image);
 
-protected:
+	//void Initialize();
 	void SetTop(const QPoint& top);
 	QPoint GetTop() const;
 
 	void SetLeft(const QPoint& left);
 	QPoint GetLeft() const;
 
-	void SetWidth(const double width);
+	void SetWidth(double width);
 	double GetWidth() const;
 
-	void SetHeight(const double height);
+	void SetHeight(double height);
 	double GetHeight() const;
 
-protected:
+private:
 	QPoint m_top;
 	QPoint m_left;
 	double m_width{ 0.0 };

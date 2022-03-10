@@ -36,19 +36,7 @@
     </ClCompile>
     <ClCompile Include="ICImageProccesor.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="LogicalGates\AndGate.cpp">
-      <Filter>LogicalGates</Filter>
-    </ClCompile>
-    <ClCompile Include="LogicalGates\OrGate.cpp">
-      <Filter>LogicalGates</Filter>
-    </ClCompile>
-    <ClCompile Include="LogicalGates\XorGate.cpp">
-      <Filter>LogicalGates</Filter>
-    </ClCompile>
     <ClCompile Include="LogicalGates\Gate.cpp">
-      <Filter>LogicalGates</Filter>
-    </ClCompile>
-    <ClCompile Include="LogicalGates\NorGate.cpp">
       <Filter>LogicalGates</Filter>
     </ClCompile>
   </ItemGroup>
@@ -66,18 +54,6 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="LogicalGates\Gate.h">
-      <Filter>LogicalGates</Filter>
-    </ClInclude>
-    <ClInclude Include="LogicalGates\AndGate.h">
-      <Filter>LogicalGates</Filter>
-    </ClInclude>
-    <ClInclude Include="LogicalGates\OrGate.h">
-      <Filter>LogicalGates</Filter>
-    </ClInclude>
-    <ClInclude Include="LogicalGates\XorGate.h">
-      <Filter>LogicalGates</Filter>
-    </ClInclude>
-    <ClInclude Include="LogicalGates\NorGate.h">
       <Filter>LogicalGates</Filter>
     </ClInclude>
   </ItemGroup>

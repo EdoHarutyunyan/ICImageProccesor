@@ -6,10 +6,17 @@
 #include <cassert>
 
 // ToDo: Add Nand, ...
-#include "../LogicalGates/AndGate.h"
-#include "../LogicalGates/NorGate.h"
-#include "../LogicalGates/OrGate.h"
-#include "../LogicalGates/XorGate.h"
+
+
+namespace
+{
+	static constexpr std::string_view andImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\And.jpg" };
+	static constexpr std::string_view nandImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Nand.jpg" };
+	static constexpr std::string_view orImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Or.jpg" };
+	static constexpr std::string_view norImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Nor.jpg" };
+	static constexpr std::string_view xorImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Xor.jpg" };
+	static constexpr std::string_view xnorImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Xnor.jpg" };
+} // namespace
 
 namespace parser
 {
@@ -41,11 +48,16 @@ void ImageParser::Start()
 
 void ImageParser::DetectGates()
 {
+	using namespace gate;
+
 	// Open file
 	// Read lines into vector
 	std::vector<std::string> fileLines;
 
-	std::map<std::string, gate::Gate*> gatesMap =
+	QImage andImage;
+	andImage.load(andImgPath.data());
+
+	std::map<std::string, GateSharedPtr> gatesMap =
 	{
 		//const QPoint& top,
 		//const QPoint& left,
@@ -53,7 +65,7 @@ void ImageParser::DetectGates()
 		//const double height,
 		//const QImage& image)
 
-		//{"And", new AndGate() },
+		{"And", std::make_shared<Gate>(andImage) },
 		//{"Nand", new AndGate() },
 		//{"Or", new AndGate() },
 		//{"Nor", new AndGate() },
@@ -67,12 +79,10 @@ void ImageParser::DetectGates()
 	{
 		std::vector<std::string> tokens;
 		split(line, tokens);
-		//gatesMap[tokens[0]]
-		//switch (switch_on)
-		//{
-		//default:
-		//	break;
-		//}
+		auto gate = gatesMap[tokens[0]];
+		//gate->Initialize()
+
+		m_detectedGates.push_back(gate);
 	}
 }
 
@@ -101,8 +111,22 @@ void ImageParser::DetectLines()
 	HoughLinesP(imgCanny, lines, 1, CV_PI / 180, 80, 30, 10);
 	for (size_t i = 0; i < lines.size(); i++)
 	{
-		line(imgSrc, Point(lines[i][0], lines[i][1]),
-			Point(lines[i][2], lines[i][3]), Scalar(0, 255, 0, 128));
+		QPoint point1(lines[i][0], lines[i][1]);
+		QPoint point2(lines[i][2], lines[i][3]);
+
+		FindNearestGates(point1, point2);
+		//line(imgSrc, Point(lines[i][0], lines[i][1]),
+		//	Point(lines[i][2], lines[i][3]), Scalar(0, 255, 0, 128));
+	}
+}
+
+void ImageParser::FindNearestGates(const QPoint& point1, const QPoint& point2)
+{
+	std::vector<std::vector<uint>> matrix;
+
+	for (const auto& detectedGate : m_detectedGates)
+	{
+		
 	}
 }
 

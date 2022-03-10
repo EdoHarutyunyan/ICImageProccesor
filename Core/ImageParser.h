@@ -4,6 +4,7 @@
 
 #include <string>
 #include <QWidget>
+#include "../LogicalGates/Gate.h"
 
 class QPushButton;
 
@@ -19,9 +20,11 @@ public:
 private:
 	void DetectGates();
 	void DetectLines();
+	void FindNearestGates(const QPoint& point1, const QPoint& point2);
 
 private:
 	std::string m_path;
+	std::vector<gate::GateSharedPtr> m_detectedGates;
 };
 
 } // namespace parser
