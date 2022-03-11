@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ICImageProccesor.cpp" />
+    <ClCompile Include="KDTree.cpp" />
     <ClCompile Include="LogicalGates\Gate.cpp" />
     <ClCompile Include="LogicalGates\Gate0.cpp" />
     <ClCompile Include="LogicalGates\Gate180.cpp" />
@@ -108,6 +109,7 @@
     <ClCompile Include="Core\ImageParser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="KDTree.h" />
     <ClInclude Include="LogicalGates\Gate.h" />
     <ClInclude Include="LogicalGates\Gate0.h" />
     <ClInclude Include="LogicalGates\Gate180.h" />

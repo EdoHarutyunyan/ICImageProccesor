@@ -18,6 +18,9 @@
     <Filter Include="Resources">
       <UniqueIdentifier>{066da104-9b36-492c-bf1c-224cd5379d06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{6f96da30-0e7f-4318-8862-b461f612d252}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="ICImageProccesor.qrc">
@@ -51,6 +54,9 @@
     <ClCompile Include="LogicalGates\Gate.cpp">
       <Filter>LogicalGates</Filter>
     </ClCompile>
+    <ClCompile Include="KDTree.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Core\ICDesigner.h">
@@ -79,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="LogicalGates\Gate.h">
       <Filter>LogicalGates</Filter>
+    </ClInclude>
+    <ClInclude Include="KDTree.h">
+      <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
