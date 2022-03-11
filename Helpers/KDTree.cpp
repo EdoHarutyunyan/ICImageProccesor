@@ -1,8 +1,13 @@
 #include "KDTree.h"
 
+#include <algorithm>
 #include <cmath>
+#include <functional>
 #include <iterator>
 #include <limits>
+#include <memory>
+#include <vector>
+
 
 KDNode::KDNode() = default;
 
@@ -15,8 +20,7 @@ KDNode::KDNode(const point_t & pt, const size_t & idx_, const KDNodePtr & left_,
 }
 
 KDNode::KDNode(const pointIndex & pi, const KDNodePtr & left_,
-    const KDNodePtr & right_)
-{
+    const KDNodePtr & right_) {
     x = pi.first;
     index = pi.second;
     left = left_;
@@ -231,8 +235,12 @@ pointIndex KDTree::nearest_pointIndex(const point_t & pt) {
     return pointIndex(point_t(*Nearest), size_t(*Nearest));
 }
 
-pointIndexArr KDTree::neighborhood_(const KDNodePtr& branch, const point_t& pt, const double& rad, const size_t& level)
-{
+pointIndexArr KDTree::neighborhood_(  //
+    const KDNodePtr & branch,          //
+    const point_t & pt,                //
+    const double& rad,                //
+    const size_t & level               //
+) {
     double d, dx, dx2;
 
     if (!bool(*branch)) {
@@ -276,14 +284,16 @@ pointIndexArr KDTree::neighborhood_(const KDNodePtr& branch, const point_t& pt, 
     return nbh;
 };
 
-pointIndexArr KDTree::neighborhood(const point_t & pt, const double& rad)
-{
+pointIndexArr KDTree::neighborhood(  //
+    const point_t & pt,               //
+    const double& rad) {
     size_t level = 0;
     return neighborhood_(root, pt, rad, level);
 }
 
-pointVec KDTree::neighborhood_points(const point_t & pt, const double& rad)
-{
+pointVec KDTree::neighborhood_points(  //
+    const point_t & pt,                 //
+    const double& rad) {
     size_t level = 0;
     pointIndexArr nbh = neighborhood_(root, pt, rad, level);
     pointVec nbhp;
@@ -293,8 +303,9 @@ pointVec KDTree::neighborhood_points(const point_t & pt, const double& rad)
     return nbhp;
 }
 
-indexArr KDTree::neighborhood_indices(const point_t & pt, const double& rad)
-{
+indexArr KDTree::neighborhood_indices(  //
+    const point_t & pt,                  //
+    const double& rad) {
     size_t level = 0;
     pointIndexArr nbh = neighborhood_(root, pt, rad, level);
     indexArr nbhi;
