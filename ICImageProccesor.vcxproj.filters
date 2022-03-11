@@ -54,7 +54,7 @@
     <ClCompile Include="LogicalGates\Gate.cpp">
       <Filter>LogicalGates</Filter>
     </ClCompile>
-    <ClCompile Include="KDTree.cpp">
+    <ClCompile Include="Helpers\KDTree.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,7 +86,7 @@
     <ClInclude Include="LogicalGates\Gate.h">
       <Filter>LogicalGates</Filter>
     </ClInclude>
-    <ClInclude Include="KDTree.h">
+    <ClInclude Include="Helpers\KDTree.h">
       <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
