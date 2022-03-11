@@ -7,12 +7,12 @@
 namespace gate
 {
 
-class Gate0
+class Gate
 {
 public:
-	explicit Gate0(const QImage& image);
+	explicit Gate(const QImage& image);
 
-	Gate0(const QPoint& topLeft, double width, double height, const QImage& image);
+	Gate(const QPoint& top, double width, double height, const QImage& image);
 
 	//void Initialize();
 	void SetTopLeft(const QPoint& topLeft);
@@ -31,6 +31,6 @@ private:
 	QImage m_image;
 };
 
-using GateSharedPtr = std::shared_ptr<Gate0>;
+using GateSharedPtr = std::shared_ptr<Gate>;
 
 } // namespace gate

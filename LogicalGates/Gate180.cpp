@@ -1,61 +1,49 @@
-#include "Gate.h"
+#include "Gate180.h"
 
 namespace gate
 {
 
-Gate::Gate(const QImage& image) : m_image(image)
+Gate180::Gate180(const QImage& image) : m_image(image)
 {
 }
 
-Gate::Gate(const QPoint& top,
-	const QPoint& left,
+Gate180::Gate180(const QPoint& topLeft,
 	const double width,
 	const double height,
 	const QImage& image)
-	: m_top(top)
-	, m_left(left)
+	: m_topLeft(topLeft)
 	, m_width(width)
 	, m_height(height)
 	, m_image(image)
 {
 }
 
-void Gate::SetTop(const QPoint& top)
+void Gate180::SetTopLeft(const QPoint& topLeft)
 {
-	m_top = top;
+	m_topLeft = topLeft;
 }
 
-QPoint Gate::GetTop() const
+QPoint Gate180::GetTopLeft() const
 {
-	return m_top;
+	return m_topLeft;
 }
 
-void Gate::SetLeft(const QPoint& left)
-{
-	m_left = left;
-}
-
-QPoint Gate::GetLeft() const
-{
-	return m_left;
-}
-
-void Gate::SetWidth(const double width)
+void Gate180::SetWidth(const double width)
 {
 	m_width = width;
 }
 
-double Gate::GetWidth() const
+double Gate180::GetWidth() const
 {
 	return m_width;
 }
 
-void Gate::SetHeight(const double height)
+void Gate180::SetHeight(const double height)
 {
 	m_height = height;
 }
 
-double Gate::GetHeight() const
+double Gate180::GetHeight() const
 {
 	return m_height;
 }

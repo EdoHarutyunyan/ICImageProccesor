@@ -97,6 +97,10 @@
   <ItemGroup>
     <ClCompile Include="ICImageProccesor.cpp" />
     <ClCompile Include="LogicalGates\Gate.cpp" />
+    <ClCompile Include="LogicalGates\Gate0.cpp" />
+    <ClCompile Include="LogicalGates\Gate180.cpp" />
+    <ClCompile Include="LogicalGates\Gate270.cpp" />
+    <ClCompile Include="LogicalGates\Gate90.cpp" />
     <ClCompile Include="main.cpp" />
     <QtRcc Include="ICImageProccesor.qrc" />
     <QtUic Include="ICImageProccesor.ui" />
@@ -105,6 +109,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LogicalGates\Gate.h" />
+    <ClInclude Include="LogicalGates\Gate0.h" />
+    <ClInclude Include="LogicalGates\Gate180.h" />
+    <ClInclude Include="LogicalGates\Gate270.h" />
+    <ClInclude Include="LogicalGates\Gate90.h" />
     <QtMoc Include="ICImageProccesor.h" />
     <QtMoc Include="Core\ICDesigner.h" />
     <ClInclude Include="Core\ImageParser.h" />

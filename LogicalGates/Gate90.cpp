@@ -7,37 +7,25 @@ Gate90::Gate90(const QImage& image) : m_image(image)
 {
 }
 
-Gate90::Gate90(const QPoint& top,
-	const QPoint& left,
+Gate90::Gate90(const QPoint& topLeft,
 	const double width,
 	const double height,
 	const QImage& image)
-	: m_top(top)
-	, m_left(left)
+	: m_topLeft(topLeft)
 	, m_width(width)
 	, m_height(height)
 	, m_image(image)
 {
 }
 
-void Gate90::SetTop(const QPoint& top)
+void Gate90::SetTopLeft(const QPoint& topLeft)
 {
-	m_top = top;
+	m_topLeft = topLeft;
 }
 
-QPoint Gate90::GetTop() const
+QPoint Gate90::GetTopLeft() const
 {
-	return m_top;
-}
-
-void Gate90::SetLeft(const QPoint& left)
-{
-	m_left = left;
-}
-
-QPoint Gate90::GetLeft() const
-{
-	return m_left;
+	return m_topLeft;
 }
 
 void Gate90::SetWidth(const double width)

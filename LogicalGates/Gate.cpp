@@ -1,13 +1,13 @@
-#include "Gate0.h"
+#include "Gate.h"
 
 namespace gate
 {
 
-Gate0::Gate0(const QImage& image) : m_image(image)
+Gate::Gate(const QImage& image) : m_image(image)
 {
 }
 
-Gate0::Gate0(const QPoint& topLeft,
+Gate::Gate(const QPoint& topLeft,
 	const double width,
 	const double height,
 	const QImage& image)
@@ -18,32 +18,32 @@ Gate0::Gate0(const QPoint& topLeft,
 {
 }
 
-void Gate0::SetTopLeft(const QPoint& topLeft)
+void Gate::SetTopLeft(const QPoint& topLeft)
 {
 	m_topLeft = topLeft;
 }
 
-QPoint Gate0::GetTopLeft() const
+QPoint Gate::GetTopLeft() const
 {
 	return m_topLeft;
 }
 
-void Gate0::SetWidth(const double width)
+void Gate::SetWidth(const double width)
 {
 	m_width = width;
 }
 
-double Gate0::GetWidth() const
+double Gate::GetWidth() const
 {
 	return m_width;
 }
 
-void Gate0::SetHeight(const double height)
+void Gate::SetHeight(const double height)
 {
 	m_height = height;
 }
 
-double Gate0::GetHeight() const
+double Gate::GetHeight() const
 {
 	return m_height;
 }

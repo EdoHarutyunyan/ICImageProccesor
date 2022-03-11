@@ -7,37 +7,25 @@ Gate270::Gate270(const QImage& image) : m_image(image)
 {
 }
 
-Gate270::Gate270(const QPoint& top,
-	const QPoint& left,
+Gate270::Gate270(const QPoint& topLeft,
 	const double width,
 	const double height,
 	const QImage& image)
-	: m_top(top)
-	, m_left(left)
+	: m_topLeft(topLeft)
 	, m_width(width)
 	, m_height(height)
 	, m_image(image)
 {
 }
 
-void Gate270::SetTop(const QPoint& top)
+void Gate270::SetTopLeft(const QPoint& topLeft)
 {
-	m_top = top;
+	m_topLeft = topLeft;
 }
 
-QPoint Gate270::GetTop() const
+QPoint Gate270::GetTopLeft() const
 {
-	return m_top;
-}
-
-void Gate270::SetLeft(const QPoint& left)
-{
-	m_left = left;
-}
-
-QPoint Gate270::GetLeft() const
-{
-	return m_left;
+	return m_topLeft;
 }
 
 void Gate270::SetWidth(const double width)

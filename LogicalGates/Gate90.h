@@ -12,15 +12,11 @@ class Gate90
 public:
 	explicit Gate90(const QImage& image);
 
-	Gate90(const QPoint& top, const QPoint& left,
-		double width, double height, const QImage& image);
+	Gate90(const QPoint& topLeft, double width, double height, const QImage& image);
 
 	//void Initialize();
-	void SetTop(const QPoint& top);
-	QPoint GetTop() const;
-
-	void SetLeft(const QPoint& left);
-	QPoint GetLeft() const;
+	void SetTopLeft(const QPoint& topLeft);
+	QPoint GetTopLeft() const;
 
 	void SetWidth(double width);
 	double GetWidth() const;
@@ -29,13 +25,10 @@ public:
 	double GetHeight() const;
 
 private:
-	QPoint m_top;
-	QPoint m_left;
+	QPoint m_topLeft;
 	double m_width{ 0.0 };
 	double m_height{ 0.0 };
 	QImage m_image;
 };
-
-using GateSharedPtr = std::shared_ptr<Gate90>;
 
 } // namespace gate
