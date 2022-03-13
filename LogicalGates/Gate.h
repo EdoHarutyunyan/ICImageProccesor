@@ -24,7 +24,6 @@ public:
 	void Initialize(const QPoint& center, double width, double height, size_t id);
 	virtual std::vector<std::pair<double, double>> GetConnectionPoints();
 
-protected:
 	void SetCenter(const QPoint& center);
 	QPoint GetCenter() const;
 

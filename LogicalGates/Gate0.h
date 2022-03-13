@@ -16,21 +16,6 @@ public:
 
 	void Initialize(const QPoint & center, double width, double height, size_t id);
 	std::vector<std::pair<double, double>> GetConnectionPoints() override;
-	
-	void SetCenter(const QPoint& center);
-	QPoint GetCenter() const;
-
-	void SetWidth(double width);
-	double GetWidth() const;
-
-	void SetHeight(double height);
-	double GetHeight() const;
-
-	void SetId(size_t id);
-	size_t GetId() const;
-
-	void SetInputType(InputType inputType);
-	InputType GetInputType() const;
 };
 
 } // namespace gate
