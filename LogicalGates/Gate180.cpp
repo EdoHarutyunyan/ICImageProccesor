@@ -1,5 +1,11 @@
 #include "Gate180.h"
 
+namespace
+{
+	static constexpr double newWidth{ 500 };
+	static constexpr double newHeight{ 250 };
+}
+
 namespace gate
 {
 
@@ -7,12 +13,15 @@ Gate180::Gate180(std::string_view imagePath, const InputType inputType) : Gate(i
 {
 	QImage image;
 	image.load(imagePath.data());
-	m_image = image.scaled(QSize(500, 250));
+	m_image = image.scaled(QSize(newWidth, newHeight));
 }
 
 void Gate180::Initialize(const QPoint& topLeft, const double width, const double height, const size_t id)
 {
-	Gate::Initialize(topLeft, width, height, id);
+	Q_UNUSED(width);
+	Q_UNUSED(height);
+
+	Gate::Initialize(topLeft, newWidth, newHeight, id);
 }
 
 std::vector<std::pair<double, double>> Gate180::GetConnectionPoints()
