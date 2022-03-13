@@ -5,7 +5,9 @@ namespace gate
 
 Gate90::Gate90(std::string_view imagePath, const InputType inputType) : Gate(inputType)
 {
-	m_image.load(imagePath.data());
+	QImage image;
+	image.load(imagePath.data());
+	m_image = image.scaled(QSize(250, 500));
 }
 
 void Gate90::Initialize(const QPoint& topLeft, const double width, const double height, const size_t id)
