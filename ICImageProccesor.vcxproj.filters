@@ -91,22 +91,100 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\And.jpg">
+    <Image Include="Resources\And0.jpg">
       <Filter>Resources</Filter>
     </Image>
-    <Image Include="Resources\Nand.jpg">
+    <Image Include="Resources\And90.jpg">
       <Filter>Resources</Filter>
     </Image>
-    <Image Include="Resources\Nor.jpg">
+    <Image Include="Resources\And180.jpg">
       <Filter>Resources</Filter>
     </Image>
-    <Image Include="Resources\Or.jpg">
+    <Image Include="Resources\And270.jpg">
       <Filter>Resources</Filter>
     </Image>
-    <Image Include="Resources\Xnor.jpg">
+    <Image Include="Resources\Buffer0.jpg">
       <Filter>Resources</Filter>
     </Image>
-    <Image Include="Resources\Xor.jpg">
+    <Image Include="Resources\Buffer90.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Buffer180.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Buffer270.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Nand0.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Nand90.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Nand180.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Nand270.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Nor0.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Nor90.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Nor180.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Nor270.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Not0.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Not90.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Not180.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Not270.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Or0.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Or90.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Or180.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Or270.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Xnor0.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Xnor90.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Xnor180.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Xnor270.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Xor0.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Xor90.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Xor180.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\Xor270.jpg">
       <Filter>Resources</Filter>
     </Image>
   </ItemGroup>

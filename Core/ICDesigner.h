@@ -31,7 +31,7 @@ public:
 
 private:
 	parser::ParserSharedPtr m_parser{ nullptr };
-	std::vector<gate::GateSharedPtr> m_gates;
+	std::vector<std::shared_ptr<gate::Gate>> m_gates;
 	QGraphicsView* m_graphicsView;
 	QGraphicsScene* m_scene;
 	QPushButton* m_importButton;

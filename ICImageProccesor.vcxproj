@@ -121,12 +121,38 @@
     <ClInclude Include="Core\IParser.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\And.jpg" />
-    <Image Include="Resources\Nand.jpg" />
-    <Image Include="Resources\Nor.jpg" />
-    <Image Include="Resources\Or.jpg" />
-    <Image Include="Resources\Xnor.jpg" />
-    <Image Include="Resources\Xor.jpg" />
+    <Image Include="Resources\And0.jpg" />
+    <Image Include="Resources\And180.jpg" />
+    <Image Include="Resources\And270.jpg" />
+    <Image Include="Resources\And90.jpg" />
+    <Image Include="Resources\Buffer0.jpg" />
+    <Image Include="Resources\Buffer180.jpg" />
+    <Image Include="Resources\Buffer270.jpg" />
+    <Image Include="Resources\Buffer90.jpg" />
+    <Image Include="Resources\Nand0.jpg" />
+    <Image Include="Resources\Nand180.jpg" />
+    <Image Include="Resources\Nand270.jpg" />
+    <Image Include="Resources\Nand90.jpg" />
+    <Image Include="Resources\Nor0.jpg" />
+    <Image Include="Resources\Nor180.jpg" />
+    <Image Include="Resources\Nor270.jpg" />
+    <Image Include="Resources\Nor90.jpg" />
+    <Image Include="Resources\Not0.jpg" />
+    <Image Include="Resources\Not180.jpg" />
+    <Image Include="Resources\Not270.jpg" />
+    <Image Include="Resources\Not90.jpg" />
+    <Image Include="Resources\Or0.jpg" />
+    <Image Include="Resources\Or180.jpg" />
+    <Image Include="Resources\Or270.jpg" />
+    <Image Include="Resources\Or90.jpg" />
+    <Image Include="Resources\Xnor0.jpg" />
+    <Image Include="Resources\Xnor180.jpg" />
+    <Image Include="Resources\Xnor270.jpg" />
+    <Image Include="Resources\Xnor90.jpg" />
+    <Image Include="Resources\Xor0.jpg" />
+    <Image Include="Resources\Xor180.jpg" />
+    <Image Include="Resources\Xor270.jpg" />
+    <Image Include="Resources\Xor90.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -3,49 +3,78 @@
 namespace gate
 {
 
-Gate270::Gate270(const QImage& image) : m_image(image)
+Gate270::Gate270(std::string_view imagePath, const InputType inputType) : Gate(inputType)
 {
+	m_image.load(imagePath.data());
 }
 
-Gate270::Gate270(const QPoint& topLeft,
-	const double width,
-	const double height,
-	const QImage& image)
-	: m_topLeft(topLeft)
-	, m_width(width)
-	, m_height(height)
-	, m_image(image)
+void Gate270::Initialize(const QPoint& topLeft, const double width, const double height, const size_t id)
 {
+	Gate::Initialize(topLeft, width, height, id);
+}
+
+std::vector<std::pair<double, double>> Gate270::GetConnectionPoints()
+{
+	if (m_inputType == InputType::One)
+	{
+
+	}
+	else if (m_inputType == InputType::Two)
+	{
+
+	}
+
+	return std::vector<std::pair<double, double>>();
 }
 
 void Gate270::SetTopLeft(const QPoint& topLeft)
 {
-	m_topLeft = topLeft;
+	Gate::SetTopLeft(topLeft);
 }
 
 QPoint Gate270::GetTopLeft() const
 {
-	return m_topLeft;
+	return Gate::GetTopLeft();
 }
 
 void Gate270::SetWidth(const double width)
 {
-	m_width = width;
+	Gate::SetWidth(width);
 }
 
 double Gate270::GetWidth() const
 {
-	return m_width;
+	return Gate::GetWidth();
 }
 
 void Gate270::SetHeight(const double height)
 {
-	m_height = height;
+	Gate::SetHeight(height);
 }
 
 double Gate270::GetHeight() const
 {
-	return m_height;
+	return Gate::GetHeight();
+}
+
+void Gate270::SetId(const size_t id)
+{
+	Gate::SetId(id);
+}
+
+size_t Gate270::GetId() const
+{
+	return Gate::GetId();
+}
+
+void Gate270::SetInputType(const InputType inputType)
+{
+	Gate::SetInputType(inputType);
+}
+
+InputType Gate270::GetInputType() const
+{
+	return Gate::GetInputType();
 }
 
 } // namespace gate

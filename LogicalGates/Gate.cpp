@@ -3,19 +3,26 @@
 namespace gate
 {
 
-Gate::Gate(const QImage& image) : m_image(image)
+Gate::Gate(const InputType inputType)
+	: m_inputType(inputType)
 {
 }
 
-Gate::Gate(const QPoint& topLeft,
+void Gate::Initialize(const QPoint& topLeft,
 	const double width,
 	const double height,
-	const QImage& image)
-	: m_topLeft(topLeft)
-	, m_width(width)
-	, m_height(height)
-	, m_image(image)
+	const size_t id)
 {
+	SetTopLeft(topLeft);
+	SetWidth(width);
+	SetHeight(height);
+	SetId(id);
+}
+
+std::vector<std::pair<double, double>> Gate::GetConnectionPoints()
+{
+	assert(false);
+	return std::vector<std::pair<double, double>>();
 }
 
 void Gate::SetTopLeft(const QPoint& topLeft)
@@ -46,6 +53,26 @@ void Gate::SetHeight(const double height)
 double Gate::GetHeight() const
 {
 	return m_height;
+}
+
+void Gate::SetId(const size_t id)
+{
+	m_id = id;
+}
+
+size_t Gate::GetId() const
+{
+	return m_id;
+}
+
+void Gate::SetInputType(const InputType inputType)
+{
+	m_inputType = inputType;
+}
+
+InputType Gate::GetInputType() const
+{
+	return m_inputType;
 }
 
 } // namespace gate

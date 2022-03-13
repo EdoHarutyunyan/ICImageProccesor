@@ -1,5 +1,5 @@
 #pragma once
-#include <iostream>
+#include "Gate.h"
 
 #include <QPoint.h>
 #include <QImage.h>
@@ -7,14 +7,16 @@
 namespace gate
 {
 
-class Gate180
+class Gate180 : public Gate
 {
 public:
-	explicit Gate180(const QImage& image);
+	Gate180() = default;
+	Gate180(std::string_view imagePath, InputType inputType);
+	~Gate180() override = default;
 
-	Gate180(const QPoint& topLeft, double width, double height, const QImage& image);
+	void Initialize(const QPoint & topLeft, double width, double height, size_t id);
+	std::vector<std::pair<double, double>> GetConnectionPoints() override;
 
-	//void Initialize();
 	void SetTopLeft(const QPoint& topLeft);
 	QPoint GetTopLeft() const;
 
@@ -24,11 +26,11 @@ public:
 	void SetHeight(double height);
 	double GetHeight() const;
 
-private:
-	QPoint m_topLeft;
-	double m_width{ 0.0 };
-	double m_height{ 0.0 };
-	QImage m_image;
+	void SetId(size_t id);
+	size_t GetId() const;
+
+	void SetInputType(InputType inputType);
+	InputType GetInputType() const;
 };
 
 } // namespace gate

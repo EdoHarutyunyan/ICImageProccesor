@@ -5,6 +5,7 @@
 #include <string>
 #include <QWidget>
 #include "../LogicalGates/Gate.h"
+#include "../Helpers/KDTree.h"
 
 class QPushButton;
 
@@ -20,11 +21,13 @@ public:
 private:
 	void DetectGates();
 	void DetectLines();
-	void FindNearestGates(const QPoint& point1, const QPoint& point2);
+	void CreateKDTree();
+	void FindNearestGate(const point_t& point);
 
 private:
 	std::string m_path;
-	std::vector<gate::GateSharedPtr> m_detectedGates;
+	std::vector<std::shared_ptr<gate::Gate>> m_detectedGates;
+	std::shared_ptr<KDTree> m_kdTree = nullptr;
 };
 
 } // namespace parser
