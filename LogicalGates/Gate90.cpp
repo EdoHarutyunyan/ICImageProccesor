@@ -16,12 +16,12 @@ Gate90::Gate90(std::string_view imagePath, const InputType inputType) : Gate(inp
 	m_image = image.scaled(QSize(newWidth, newHeight));
 }
 
-void Gate90::Initialize(const QPoint& topLeft, const double width, const double height, const size_t id)
+void Gate90::Initialize(const QPoint& center, const double width, const double height, const size_t id)
 {
 	Q_UNUSED(width);
 	Q_UNUSED(height);
 
-	Gate::Initialize(topLeft, newWidth, newHeight, id);
+	Gate::Initialize(center, newWidth, newHeight, id);
 }
 
 std::vector<std::pair<double, double>> Gate90::GetConnectionPoints()
@@ -38,14 +38,14 @@ std::vector<std::pair<double, double>> Gate90::GetConnectionPoints()
 	return std::vector<std::pair<double, double>>();
 }
 
-void Gate90::SetTopLeft(const QPoint& topLeft)
+void Gate90::SetCenter(const QPoint& center)
 {
-	Gate::SetTopLeft(topLeft);
+	Gate::SetCenter(center);
 }
 
-QPoint Gate90::GetTopLeft() const
+QPoint Gate90::GetCenter() const
 {
-	return Gate::GetTopLeft();
+	return Gate::GetCenter();
 }
 
 void Gate90::SetWidth(const double width)

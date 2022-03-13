@@ -8,12 +8,12 @@ Gate::Gate(const InputType inputType)
 {
 }
 
-void Gate::Initialize(const QPoint& topLeft,
+void Gate::Initialize(const QPoint& center,
 	const double width,
 	const double height,
 	const size_t id)
 {
-	SetTopLeft(topLeft);
+	SetCenter(center);
 	SetWidth(width);
 	SetHeight(height);
 	SetId(id);
@@ -25,14 +25,14 @@ std::vector<std::pair<double, double>> Gate::GetConnectionPoints()
 	return std::vector<std::pair<double, double>>();
 }
 
-void Gate::SetTopLeft(const QPoint& topLeft)
+void Gate::SetCenter(const QPoint& center)
 {
-	m_topLeft = topLeft;
+	m_center = center;
 }
 
-QPoint Gate::GetTopLeft() const
+QPoint Gate::GetCenter() const
 {
-	return m_topLeft;
+	return m_center;
 }
 
 void Gate::SetWidth(const double width)

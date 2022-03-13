@@ -21,12 +21,12 @@ public:
 	virtual ~Gate() = default;
 
 public:
-	void Initialize(const QPoint& topLeft, double width, double height, size_t id);
+	void Initialize(const QPoint& center, double width, double height, size_t id);
 	virtual std::vector<std::pair<double, double>> GetConnectionPoints();
 
 protected:
-	void SetTopLeft(const QPoint& topLeft);
-	QPoint GetTopLeft() const;
+	void SetCenter(const QPoint& center);
+	QPoint GetCenter() const;
 
 	void SetWidth(double width);
 	double GetWidth() const;
@@ -43,7 +43,7 @@ protected:
 protected:
 	size_t m_id;
 	InputType m_inputType{ InputType::Two };
-	QPoint m_topLeft;
+	QPoint m_center;
 	double m_width{ 0.0 };
 	double m_height{ 0.0 };
 	QImage m_image;

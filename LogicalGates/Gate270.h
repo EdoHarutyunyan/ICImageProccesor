@@ -17,11 +17,11 @@ public:
 	Gate270(std::string_view imagePath, InputType inputType);
 	~Gate270() override = default;
 
-	void Initialize(const QPoint& topLeft, double width, double height, size_t id);
+	void Initialize(const QPoint& center, double width, double height, size_t id);
 	std::vector<std::pair<double, double>> GetConnectionPoints() override;
 	
-	void SetTopLeft(const QPoint& topLeft);
-	QPoint GetTopLeft() const;
+	void SetCenter(const QPoint& center);
+	QPoint GetCenter() const;
 
 	void SetWidth(double width);
 	double GetWidth() const;

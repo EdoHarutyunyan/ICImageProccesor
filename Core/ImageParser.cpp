@@ -134,9 +134,9 @@ void ImageParser::DetectGates()
 		std::shared_ptr<Gate> gate = gatesMap[tokens[0]];
 
 		// to do int-double
-		const QPoint topLeft(std::stoi(tokens[1]), std::stoi(tokens[2]));
+		const QPoint center(std::stoi(tokens[1]), std::stoi(tokens[2]));
 
-		gate->Initialize(topLeft, std::stod(tokens[3]), std::stod(tokens[4]), id++);
+		gate->Initialize(center, std::stod(tokens[3]), std::stod(tokens[4]), id++);
 
 		m_detectedGates.push_back(gate);
 	}

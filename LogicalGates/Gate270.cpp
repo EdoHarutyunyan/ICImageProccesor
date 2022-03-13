@@ -16,12 +16,12 @@ Gate270::Gate270(std::string_view imagePath, const InputType inputType) : Gate(i
 	m_image = image.scaled(QSize(newWidth, newHeight));
 }
 
-void Gate270::Initialize(const QPoint& topLeft, const double width, const double height, const size_t id)
+void Gate270::Initialize(const QPoint& center, const double width, const double height, const size_t id)
 {
 	Q_UNUSED(width);
 	Q_UNUSED(height);
 
-	Gate::Initialize(topLeft, newWidth, newHeight, id);
+	Gate::Initialize(center, newWidth, newHeight, id);
 }
 
 std::vector<std::pair<double, double>> Gate270::GetConnectionPoints()
@@ -38,14 +38,14 @@ std::vector<std::pair<double, double>> Gate270::GetConnectionPoints()
 	return std::vector<std::pair<double, double>>();
 }
 
-void Gate270::SetTopLeft(const QPoint& topLeft)
+void Gate270::SetCenter(const QPoint& center)
 {
-	Gate::SetTopLeft(topLeft);
+	Gate::SetCenter(center);
 }
 
-QPoint Gate270::GetTopLeft() const
+QPoint Gate270::GetCenter() const
 {
-	return Gate::GetTopLeft();
+	return Gate::GetCenter();
 }
 
 void Gate270::SetWidth(const double width)
