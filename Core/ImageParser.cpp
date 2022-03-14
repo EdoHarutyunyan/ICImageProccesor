@@ -55,8 +55,13 @@ namespace parser
 {
 
 ImageParser::ImageParser(const std::string& path)
-	: m_path(path)
 {
+	m_image = cv::imread(path, cv::IMREAD_COLOR);
+	if (m_image.empty())
+	{
+		std::cerr << "Error while opening file.";
+		assert(false);
+	}
 }
 
 void split(const std::string& line, std::vector<std::string>& res)
@@ -85,7 +90,12 @@ void ImageParser::DetectGates()
 
 	// Open file
 	// Read lines into vector
-	std::vector<std::string> fileLines;
+	std::vector<std::string> fileLines = {
+		"And0 250 125 300 400",
+		"Or90 800 250 300 400",
+		"Nand180 1350 250 300 400",
+		"Buffer270 1900 250 300 400",
+	};
 
 	std::map<std::string, std::shared_ptr<Gate>> gatesMap =
 	{
@@ -135,10 +145,13 @@ void ImageParser::DetectGates()
 
 		// to do int-double
 		const QPoint center(std::stoi(tokens[1]), std::stoi(tokens[2]));
-
 		gate->Initialize(center, std::stod(tokens[3]), std::stod(tokens[4]), id++);
 
 		m_detectedGates.push_back(gate);
+
+		// Draw filled rect with line thickness 1 and white color on source image
+		cv::Rect rect = cv::Rect(gate->GetTopLeft().x(), gate->GetTopLeft().y(), gate->GetWidth(), gate->GetHeight());
+		cv::rectangle(m_image, rect, cv::Scalar(255, 255, 255), cv::FILLED, 1, 0);
 	}
 
 	CreateKDTree();
@@ -150,10 +163,11 @@ void ImageParser::CreateKDTree()
 
 	for (const auto& gate : m_detectedGates)
 	{
+		size_t id = gate->GetId();
 		const auto connectionPoints = gate->GetConnectionPoints();
 		for (const auto& point : connectionPoints)
 		{
-			gatesPoints.push_back({ point.first, point.second });
+			gatesPoints.push_back({ (double)point.x(), (double)point.y() });
 		}
 	}
 
@@ -164,19 +178,11 @@ void ImageParser::DetectLines()
 {
 	using namespace cv;
 
-	Mat imgSrc = imread(m_path, IMREAD_COLOR);
-	if (imgSrc.empty())
-	{
-		std::cerr << "Error while opening file.";
-		assert(false);
-		return;
-	}
-
 	Mat imgGray;
 	Mat imgBlur;
 	Mat imgCanny;
 
-	cvtColor(imgSrc, imgGray, COLOR_BGR2GRAY);
+	cvtColor(m_image, imgGray, COLOR_BGR2GRAY);
 	GaussianBlur(imgGray, imgBlur, Size(3, 3), 3, 0);
 	Canny(imgBlur, imgCanny, 25, 75);
 	
@@ -184,31 +190,45 @@ void ImageParser::DetectLines()
 	std::vector<Vec4f> lines;
 	HoughLinesP(imgCanny, lines, 1, CV_PI / 180, 80, 30, 10);
 
+	std::vector<std::vector<bool>> matrix(m_detectedGates.size(), std::vector<bool>(m_detectedGates.size()));
+
 	for (size_t i = 0; i < lines.size(); i++)
 	{
-		FindNearestGate({ lines[i][0], lines[i][1] });
-		FindNearestGate({ lines[i][2], lines[i][3] });
+		const auto id1 = FindNearestGate({ lines[i][0], lines[i][1] });
+		const auto id2 = FindNearestGate({ lines[i][2], lines[i][3] });
 
-		//QPoint point1(lines[i][0], lines[i][1]);
-		//QPoint point2(lines[i][2], lines[i][3]);
-
-		//FindNearestGate(point1, point2);
+		matrix[id1][id2] = true;
+		matrix[id2][id1] = true;
 		//line(imgSrc, Point(lines[i][0], lines[i][1]),
 		//	Point(lines[i][2], lines[i][3]), Scalar(0, 255, 0, 128));
 	}
 }
 
-// add second point
-void ImageParser::FindNearestGate(const point_t& point)
+size_t ImageParser::FindNearestGate(const point_t& point)
 {
-	m_kdTree->nearest_point(point);
+	auto kdPoint = m_kdTree->nearest_point(point);
+	QPoint qPoint(kdPoint[0], kdPoint[1]);
 
-	std::vector<std::vector<uint>> matrix;
-
-	for (const auto& detectedGate : m_detectedGates)
+	for (const auto& gate : m_detectedGates)
 	{
-		
+		const auto connectionPoints = gate->GetConnectionPoints();
+		for (const auto& point : connectionPoints)
+		{
+			if (qPoint == point)
+			{
+				return gate->GetId();
+			}
+		}
 	}
+
+	assert(false);
+	return 0u;
 }
+
+//bool IsNear(const QPoint& p1, const QPoint& p2)
+//{
+//	constexpr auto threshold{ 5 };
+//	return (p1.x() - p2.x() < threshold) && (p1.y() - p2.y() < threshold);
+//}
 
 } // namespace parser

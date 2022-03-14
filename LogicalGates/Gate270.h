@@ -17,8 +17,8 @@ public:
 	Gate270(std::string_view imagePath, InputType inputType);
 	~Gate270() override = default;
 
-	void Initialize(const QPoint& center, double width, double height, size_t id);
-	std::vector<std::pair<double, double>> GetConnectionPoints() override;
+	void Initialize(const QPoint& center, double width, double height, size_t id) override;
+	std::vector<QPoint> GetConnectionPoints() override;
 };
 
 } // namespace gate

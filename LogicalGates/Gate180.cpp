@@ -21,21 +21,26 @@ void Gate180::Initialize(const QPoint& center, const double width, const double 
 	Q_UNUSED(width);
 	Q_UNUSED(height);
 
-	Gate::Initialize(center, newWidth, newHeight, id);
+	QPoint topLeft(center.x() - newWidth / 2, center.y() - newHeight / 2);
+	Gate::Initialize(topLeft, newWidth, newHeight, id);
 }
 
-std::vector<std::pair<double, double>> Gate180::GetConnectionPoints()
+std::vector<QPoint> Gate180::GetConnectionPoints()
 {
+	std::vector<QPoint> points;
 	if (m_inputType == InputType::One)
 	{
-
+		points.emplace_back(QPoint(m_topLeft.x(), m_topLeft.y() + m_height / 2));
+		points.emplace_back(QPoint(m_topLeft.x() + m_width, m_topLeft.y() + m_height / 2));
 	}
 	else if (m_inputType == InputType::Two)
 	{
-
+		points.emplace_back(QPoint(m_topLeft.x() + m_width, m_topLeft.y() + m_height / 3));
+		points.emplace_back(QPoint(m_topLeft.x() + m_width, m_topLeft.y() + 2 * m_height / 3));
+		points.emplace_back(QPoint(m_topLeft.x(), m_topLeft.y() + m_height / 2));
 	}
 
-	return std::vector<std::pair<double, double>>();
+	return points;
 }
 
 } // namespace gate
