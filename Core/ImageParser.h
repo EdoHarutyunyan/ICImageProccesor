@@ -17,7 +17,9 @@ class ImageParser : public IParser
 {
 public:
 	ImageParser(const std::string& path);
-	void Start() override;
+	void Start(Callback cb) override;
+	std::vector<std::shared_ptr<gate::Gate>> GetGates() const override;
+	std::vector<std::vector<bool>> GetAdjacencyMatrix() const override;
 
 private:
 	void DetectGates();
@@ -28,6 +30,7 @@ private:
 private:
 	cv::Mat m_image;
 	std::vector<std::shared_ptr<gate::Gate>> m_detectedGates;
+	std::vector<std::vector<bool>> m_adjacencyMatrix;
 	std::shared_ptr<KDTree> m_kdTree = nullptr;
 };
 

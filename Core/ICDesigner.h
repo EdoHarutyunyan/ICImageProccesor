@@ -27,8 +27,10 @@ private slots:
 
 public:
 	void Test();
-	void Display();
 
+private:
+	void HandleParsedResult();
+	void Display();
 private:
 	parser::ParserSharedPtr m_parser{ nullptr };
 	std::vector<std::shared_ptr<gate::Gate>> m_gates;

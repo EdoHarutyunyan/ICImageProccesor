@@ -78,10 +78,12 @@ void split(const std::string& line, std::vector<std::string>& res)
 	}
 }
 
-void ImageParser::Start()
+void ImageParser::Start(Callback cb)
 {
 	DetectGates();
 	DetectLines();
+
+	cb();
 }
 
 void ImageParser::DetectGates()
@@ -91,10 +93,9 @@ void ImageParser::DetectGates()
 	// Open file
 	// Read lines into vector
 	std::vector<std::string> fileLines = {
-		"And0 250 125 300 400",
-		"Or90 800 250 300 400",
-		"Nand180 1350 250 300 400",
-		"Buffer270 1900 250 300 400",
+		"And0 350 225 300 400",
+		"Xor0 900 225 300 400",
+		"Buffer0 1450 225 300 400",
 	};
 
 	std::map<std::string, std::shared_ptr<Gate>> gatesMap =
@@ -154,6 +155,13 @@ void ImageParser::DetectGates()
 		cv::rectangle(m_image, rect, cv::Scalar(255, 255, 255), cv::FILLED, 1, 0);
 	}
 
+	m_adjacencyMatrix.reserve(m_detectedGates.size());
+	for (auto& vect : m_adjacencyMatrix)
+	{
+		vect.reserve(m_detectedGates.size());
+	}
+	//cv::imwrite("new1.jpg", m_image);
+
 	CreateKDTree();
 }
 
@@ -188,17 +196,15 @@ void ImageParser::DetectLines()
 	
 	// Detect lines
 	std::vector<Vec4f> lines;
-	HoughLinesP(imgCanny, lines, 1, CV_PI / 180, 80, 30, 10);
-
-	std::vector<std::vector<bool>> matrix(m_detectedGates.size(), std::vector<bool>(m_detectedGates.size()));
+	HoughLinesP(imgCanny, lines, 1, CV_PI / 180, 400, 30, 10);
 
 	for (size_t i = 0; i < lines.size(); i++)
 	{
 		const auto id1 = FindNearestGate({ lines[i][0], lines[i][1] });
 		const auto id2 = FindNearestGate({ lines[i][2], lines[i][3] });
 
-		matrix[id1][id2] = true;
-		matrix[id2][id1] = true;
+		m_adjacencyMatrix[id1][id2] = true;
+		m_adjacencyMatrix[id2][id1] = true;
 		//line(imgSrc, Point(lines[i][0], lines[i][1]),
 		//	Point(lines[i][2], lines[i][3]), Scalar(0, 255, 0, 128));
 	}
@@ -223,6 +229,16 @@ size_t ImageParser::FindNearestGate(const point_t& point)
 
 	assert(false);
 	return 0u;
+}
+
+std::vector<std::shared_ptr<gate::Gate>> ImageParser::GetGates() const
+{
+	return m_detectedGates;
+}
+
+std::vector<std::vector<bool>> ImageParser::GetAdjacencyMatrix() const
+{
+	return m_adjacencyMatrix;
 }
 
 //bool IsNear(const QPoint& p1, const QPoint& p2)

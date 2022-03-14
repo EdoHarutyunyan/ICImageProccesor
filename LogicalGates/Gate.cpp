@@ -19,6 +19,26 @@ void Gate::Initialize(const QPoint& topLeft,
 	SetId(id);
 }
 
+void Gate::SetId(const size_t id)
+{
+	m_id = id;
+}
+
+size_t Gate::GetId() const
+{
+	return m_id;
+}
+
+void Gate::SetInputType(const InputType inputType)
+{
+	m_inputType = inputType;
+}
+
+InputType Gate::GetInputType() const
+{
+	return m_inputType;
+}
+
 std::vector<QPoint> Gate::GetConnectionPoints()
 {
 	assert(false);
@@ -55,24 +75,14 @@ double Gate::GetHeight() const
 	return m_height;
 }
 
-void Gate::SetId(const size_t id)
+void Gate::SetImage(const QImage& image)
 {
-	m_id = id;
+	m_image = image;
 }
 
-size_t Gate::GetId() const
+QImage Gate::GetImage() const
 {
-	return m_id;
-}
-
-void Gate::SetInputType(const InputType inputType)
-{
-	m_inputType = inputType;
-}
-
-InputType Gate::GetInputType() const
-{
-	return m_inputType;
+	return m_image;
 }
 
 } // namespace gate

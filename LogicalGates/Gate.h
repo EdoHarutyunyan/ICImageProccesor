@@ -24,6 +24,12 @@ public:
 	virtual void Initialize(const QPoint& topLeft, double width, double height, size_t id);
 	virtual std::vector<QPoint> GetConnectionPoints();
 
+	void SetId(size_t id);
+	size_t GetId() const;
+
+	void SetInputType(InputType inputType);
+	InputType GetInputType() const;
+
 	void SetTopLeft(const QPoint& topLeft);
 	QPoint GetTopLeft() const;
 
@@ -33,11 +39,8 @@ public:
 	void SetHeight(double height);
 	double GetHeight() const;
 
-	void SetId(size_t id);
-	size_t GetId() const;
-
-	void SetInputType(InputType inputType);
-	InputType GetInputType() const;
+	void SetImage(const QImage& image);
+	QImage GetImage() const;
 
 protected:
 	size_t m_id;
