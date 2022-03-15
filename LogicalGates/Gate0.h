@@ -11,11 +11,13 @@ class Gate0 : public Gate
 {
 public:
 	Gate0() = default;
+	Gate0(const Gate0& o) = default;
 	Gate0(std::string_view imagePath, InputType inputType);
 	~Gate0() override = default;
 
 	void Initialize(const QPoint& center, double width, double height, size_t id) override;
 	std::vector<QPoint> GetConnectionPoints() override;
+	virtual std::shared_ptr<Gate> Clone() override;
 };
 
 } // namespace gate

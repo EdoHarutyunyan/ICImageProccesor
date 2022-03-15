@@ -2,8 +2,8 @@
 
 namespace
 {
-	static constexpr double newWidth{ 500 };
-	static constexpr double newHeight{ 250 };
+	static constexpr double newWidth{ 100 };
+	static constexpr double newHeight{ 50 };
 }
 
 namespace gate
@@ -41,6 +41,11 @@ std::vector<QPoint> Gate0::GetConnectionPoints()
 	}
 
 	return points;
+}
+
+std::shared_ptr<Gate> Gate0::Clone()
+{
+	return std::make_shared<Gate0>(*this);
 }
 
 } // namespace gate

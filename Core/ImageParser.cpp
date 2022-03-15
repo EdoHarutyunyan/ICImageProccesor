@@ -92,9 +92,11 @@ void ImageParser::DetectGates()
 	// Open file
 	// Read lines into vector
 	std::vector<std::string> fileLines = {
-		"And0 350 225 300 400",
-		"Xor0 900 225 300 400",
-		"Buffer0 1450 225 300 400",
+		"Nand0 50 25 200 100",
+		"Xor0 250 225 200 100",
+		"And0 450 425 200 100",
+		"Xor0 650 625 200 100",
+		"Nand0 850 825 200 100",
 	};
 
 	std::map<std::string, std::shared_ptr<Gate>> gatesMap =
@@ -105,8 +107,8 @@ void ImageParser::DetectGates()
 		{"Nor0", std::make_shared<Gate0>(nor0ImgPath, InputType::Two) },
 		{"Xor0", std::make_shared<Gate0>(xor0ImgPath, InputType::Two) },
 		{"Xnor0", std::make_shared<Gate0>(xnor0ImgPath, InputType::Two) },
-		{"Not0", std::make_shared<Gate0>(not90ImgPath, InputType::One) },
-		{"Buffer0", std::make_shared<Gate0>(buffer90ImgPath, InputType::One) },
+		{"Not0", std::make_shared<Gate0>(not0ImgPath, InputType::One) },
+		{"Buffer0", std::make_shared<Gate0>(buffer0ImgPath, InputType::One) },
 
 		{"And90", std::make_shared<Gate90>(and90ImgPath, InputType::Two) },
 		{"Nand90", std::make_shared<Gate90>(nand90ImgPath, InputType::Two) },
@@ -141,7 +143,7 @@ void ImageParser::DetectGates()
 	{
 		std::vector<std::string> tokens;
 		split(line, tokens);
-		std::shared_ptr<Gate> gate = gatesMap[tokens[0]];
+		std::shared_ptr<Gate> gate = gatesMap.at(tokens[0])->Clone();
 
 		// to do int-double
 		const QPoint center(std::stoi(tokens[1]), std::stoi(tokens[2]));
@@ -164,23 +166,90 @@ void ImageParser::DetectLines()
 	Mat imgCanny;
 
 	cvtColor(m_image, imgGray, COLOR_BGR2GRAY);
-	GaussianBlur(imgGray, imgBlur, Size(3, 3), 3, 0);
-	Canny(imgBlur, imgCanny, 25, 75);
-	
-	// Detect lines
-	std::vector<Vec4f> lines;
-	HoughLinesP(imgCanny, lines, 1, CV_PI / 180, 400, 30, 10);
+	threshold(imgGray, imgGray, 100, 255, THRESH_BINARY);
+	imgGray = ~imgGray;
+	cv::Canny(imgGray, imgCanny, 75, 200);
+	std::vector<Vec4i> linesP;
 
-	for (size_t i = 0; i < lines.size(); i++)
+	HoughLinesP(imgCanny, linesP, 1, CV_PI / 180, 10, 10, 25); // runs the actual detection
+
+	std::vector<std::pair<cv::Point, cv::Point>> allLines;
+	for (int i = 0; i < linesP.size(); i++)
 	{
-		m_wires.emplace_back(point_t(lines[i][0], lines[i][1]), point_t(lines[i][2], lines[i][3]));
+		Vec4i l = linesP[i];
+		allLines.push_back({ Point(l[0], l[1]), Point(l[2], l[3]) });
+	}
 
-		//const auto id1 = FindNearestGate({ lines[i][0], lines[i][1] });
-		//const auto id2 = FindNearestGate({ lines[i][2], lines[i][3] });
-		//m_adjacencyMatrix[id1][id2] = true;
-		//m_adjacencyMatrix[id2][id1] = true;
-		//line(imgSrc, Point(lines[i][0], lines[i][1]),
-		//	Point(lines[i][2], lines[i][3]), Scalar(0, 255, 0, 128));
+	std::vector<std::vector<std::pair<cv::Point, cv::Point>>> wires;
+	while (!allLines.empty())
+	{
+		std::vector<std::pair<cv::Point, cv::Point>> current{ allLines[0] };
+		allLines.erase(allLines.begin());
+		for (int i = 0; i < allLines.size(); ++i)
+		{
+			auto fl = current[0];
+			auto ll = current.back();
+			auto l = allLines[i];
+			const int thresh = 35;
+			bool isNearPoint = false;
+			std::pair<cv::Point, cv::Point> found;
+			auto insert_point = allLines.begin();
+
+			// Todo: code duplication
+			if (norm(fl.first - l.first) < thresh)
+			{
+				isNearPoint = true;
+				found = { l.second, l.first };
+				insert_point = current.begin();
+			}
+			else if (norm(fl.first - l.second) < thresh)
+			{
+				isNearPoint = true;
+				found = { l.first, l.second };
+				insert_point = current.begin();
+			}
+			else if (norm(ll.second - l.second) < thresh)
+			{
+				isNearPoint = true;
+				found = { l.second, l.first };
+				insert_point = current.end();
+			}
+			else if (norm(ll.second - l.first) < thresh)
+			{
+				isNearPoint = true;
+				found = { l.first, l.second };
+				insert_point = current.end();
+			}
+
+			if (isNearPoint)
+			{
+				allLines.erase(allLines.begin() + i);
+				--i;
+
+				bool matched = false;
+				for (auto l1 : current)
+				{
+					if ((norm(l1.first - found.first) < thresh && norm(l1.second - found.second) < thresh)
+						|| (norm(l1.second - found.first) < thresh && norm(l1.first - found.second) < thresh))
+					{
+						matched = true;
+					}
+				}
+
+				if (!matched)
+				{
+					current.insert(insert_point, found);
+				}
+			}
+		}
+
+		wires.push_back(current);
+	}
+
+	for (auto& wire : wires)
+	{
+		m_wires.emplace_back(point_t(wire[0].first.x, wire[0].first.y),
+			point_t(wire.back().second.x, wire.back().second.y));
 	}
 }
 

@@ -39,12 +39,6 @@ InputType Gate::GetInputType() const
 	return m_inputType;
 }
 
-std::vector<QPoint> Gate::GetConnectionPoints()
-{
-	assert(false);
-	return std::vector<QPoint>();
-}
-
 void Gate::SetTopLeft(const QPoint& topLeft)
 {
 	m_topLeft = topLeft;

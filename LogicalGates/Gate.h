@@ -20,9 +20,9 @@ public:
 	Gate(InputType inputType);
 	virtual ~Gate() = default;
 
-public:
 	virtual void Initialize(const QPoint& topLeft, double width, double height, size_t id);
-	virtual std::vector<QPoint> GetConnectionPoints();
+	virtual std::vector<QPoint> GetConnectionPoints() = 0;
+	virtual std::shared_ptr<Gate> Clone() = 0;
 
 	void SetId(size_t id);
 	size_t GetId() const;

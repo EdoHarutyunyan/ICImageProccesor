@@ -30,7 +30,7 @@ ICDesigner::ICDesigner(QWidget* parent)
 	showMaximized();
 	setWindowTitle("IC Image Proccessor");
 
-	Test();
+	// Test();
 
 	connect(m_importButton, SIGNAL(released()), this, SLOT(on_importButton_released()));
 }
@@ -60,7 +60,6 @@ void ICDesigner::HandleParsedResult()
 {
 	const auto detectedGates = m_parser->GetGates();
 	const auto detectedWires = m_parser->GetWires();
-	//const auto connectionsToDraw = m_parser->GetAdjacencyMatrix();
 
 	pointVec gatesPoints;
 	for (const auto detectedGate : detectedGates)
@@ -80,17 +79,17 @@ void ICDesigner::HandleParsedResult()
 		m_scene->addItem(pixmap);
 	}
 
-	std::shared_ptr<KDTree> kdTree = std::make_shared<KDTree>(gatesPoints);
+	//std::shared_ptr<KDTree> kdTree = std::make_shared<KDTree>(gatesPoints);
 
-	for (const auto& wire : detectedWires)
-	{
-		auto kdPoint1 = kdTree->nearest_point(wire.first);
-		auto kdPoint2 = kdTree->nearest_point(wire.second);
-		QPoint qPoint1(kdPoint1[0], kdPoint1[1]);
-		QPoint qPoint2(kdPoint2[0], kdPoint2[1]);
+	//for (const auto& wire : detectedWires)
+	//{
+	//	auto kdPoint1 = kdTree->nearest_point(wire.first);
+	//	auto kdPoint2 = kdTree->nearest_point(wire.second);
+	//	QPoint qPoint1(kdPoint1[0], kdPoint1[1]);
+	//	QPoint qPoint2(kdPoint2[0], kdPoint2[1]);
 
 
-	}
+	//}
 
 	m_graphicsView->setScene(m_scene);
 }
@@ -126,7 +125,7 @@ void ICDesigner::on_importButton_released()
 	//QString fileName = QFileDialog::getOpenFileName(this, "Open a file", QDir::homePath());
 
 	// ToDo: file path should be input parameter
-	m_parser = std::make_shared<parser::ImageParser>("C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\test2.jpg");
+	m_parser = std::make_shared<parser::ImageParser>("C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\test_1.jpg");
 	m_parser->Start(std::bind([this]()
 		{
 			HandleParsedResult();
