@@ -19,19 +19,16 @@ public:
 	ImageParser(const std::string& path);
 	void Start(Callback cb) override;
 	std::vector<std::shared_ptr<gate::Gate>> GetGates() const override;
-	std::vector<std::vector<bool>> GetAdjacencyMatrix() const override;
+	std::vector<std::pair<point_t, point_t>> GetWires() const override;
 
 private:
 	void DetectGates();
 	void DetectLines();
-	void CreateKDTree();
-	size_t FindNearestGate(const point_t& point);
 
 private:
 	cv::Mat m_image;
 	std::vector<std::shared_ptr<gate::Gate>> m_detectedGates;
-	std::vector<std::vector<bool>> m_adjacencyMatrix;
-	std::shared_ptr<KDTree> m_kdTree = nullptr;
+	std::vector<std::pair<point_t, point_t>> m_wires;
 };
 
 } // namespace parser

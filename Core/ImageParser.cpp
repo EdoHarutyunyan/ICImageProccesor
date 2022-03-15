@@ -1,5 +1,4 @@
 #include "ImageParser.h"
-#include "../Helpers/KDTree.h"
 #include "../LogicalGates/Gate0.h"
 #include "../LogicalGates/Gate90.h"
 #include "../LogicalGates/Gate180.h"
@@ -154,32 +153,6 @@ void ImageParser::DetectGates()
 		cv::Rect rect = cv::Rect(gate->GetTopLeft().x(), gate->GetTopLeft().y(), gate->GetWidth(), gate->GetHeight());
 		cv::rectangle(m_image, rect, cv::Scalar(255, 255, 255), cv::FILLED, 1, 0);
 	}
-
-	m_adjacencyMatrix.reserve(m_detectedGates.size());
-	for (auto& vect : m_adjacencyMatrix)
-	{
-		vect.reserve(m_detectedGates.size());
-	}
-	//cv::imwrite("new1.jpg", m_image);
-
-	CreateKDTree();
-}
-
-void ImageParser::CreateKDTree()
-{
-	pointVec gatesPoints;
-
-	for (const auto& gate : m_detectedGates)
-	{
-		size_t id = gate->GetId();
-		const auto connectionPoints = gate->GetConnectionPoints();
-		for (const auto& point : connectionPoints)
-		{
-			gatesPoints.push_back({ (double)point.x(), (double)point.y() });
-		}
-	}
-
-	m_kdTree = std::make_shared<KDTree>(gatesPoints);
 }
 
 void ImageParser::DetectLines()
@@ -200,35 +173,15 @@ void ImageParser::DetectLines()
 
 	for (size_t i = 0; i < lines.size(); i++)
 	{
-		const auto id1 = FindNearestGate({ lines[i][0], lines[i][1] });
-		const auto id2 = FindNearestGate({ lines[i][2], lines[i][3] });
+		m_wires.emplace_back(point_t(lines[i][0], lines[i][1]), point_t(lines[i][2], lines[i][3]));
 
-		m_adjacencyMatrix[id1][id2] = true;
-		m_adjacencyMatrix[id2][id1] = true;
+		//const auto id1 = FindNearestGate({ lines[i][0], lines[i][1] });
+		//const auto id2 = FindNearestGate({ lines[i][2], lines[i][3] });
+		//m_adjacencyMatrix[id1][id2] = true;
+		//m_adjacencyMatrix[id2][id1] = true;
 		//line(imgSrc, Point(lines[i][0], lines[i][1]),
 		//	Point(lines[i][2], lines[i][3]), Scalar(0, 255, 0, 128));
 	}
-}
-
-size_t ImageParser::FindNearestGate(const point_t& point)
-{
-	auto kdPoint = m_kdTree->nearest_point(point);
-	QPoint qPoint(kdPoint[0], kdPoint[1]);
-
-	for (const auto& gate : m_detectedGates)
-	{
-		const auto connectionPoints = gate->GetConnectionPoints();
-		for (const auto& point : connectionPoints)
-		{
-			if (qPoint == point)
-			{
-				return gate->GetId();
-			}
-		}
-	}
-
-	assert(false);
-	return 0u;
 }
 
 std::vector<std::shared_ptr<gate::Gate>> ImageParser::GetGates() const
@@ -236,15 +189,9 @@ std::vector<std::shared_ptr<gate::Gate>> ImageParser::GetGates() const
 	return m_detectedGates;
 }
 
-std::vector<std::vector<bool>> ImageParser::GetAdjacencyMatrix() const
+std::vector<std::pair<point_t, point_t>> ImageParser::GetWires() const
 {
-	return m_adjacencyMatrix;
+	return m_wires;
 }
-
-//bool IsNear(const QPoint& p1, const QPoint& p2)
-//{
-//	constexpr auto threshold{ 5 };
-//	return (p1.x() - p2.x() < threshold) && (p1.y() - p2.y() < threshold);
-//}
 
 } // namespace parser

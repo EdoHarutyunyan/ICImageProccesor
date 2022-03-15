@@ -58,31 +58,63 @@ void ICDesigner::Test()
 
 void ICDesigner::HandleParsedResult()
 {
-	const auto gatesToDraw = m_parser->GetGates();
-	const auto connectionsToDraw = m_parser->GetAdjacencyMatrix();
+	const auto detectedGates = m_parser->GetGates();
+	const auto detectedWires = m_parser->GetWires();
+	//const auto connectionsToDraw = m_parser->GetAdjacencyMatrix();
 
-	for (const auto gateToDraw : gatesToDraw)
+	pointVec gatesPoints;
+	for (const auto detectedGate : detectedGates)
 	{
-		//QRect rect(gateToDraw->GetTopLeft(), QSize(gateToDraw->GetWidth(), gateToDraw->GetHeight()));
-		//QGraphicsRectItem* item = new QGraphicsRectItem(rect);
+		const auto id = detectedGate->GetId();
+		const auto connectionPoints = detectedGate->GetConnectionPoints();
+		for (const auto& point : connectionPoints)
+		{
+			gatesPoints.emplace_back(std::make_pair(id, point_t((double)point.x(), (double)point.y())));
+		}
 
 		QGraphicsPixmapItem* pixmap = new QGraphicsPixmapItem();
-		pixmap->setPixmap(QPixmap::fromImage(gateToDraw->GetImage(), Qt::AutoColor));
+		pixmap->setPixmap(QPixmap::fromImage(detectedGate->GetImage(), Qt::AutoColor));
 		pixmap->setFlag(QGraphicsItem::ItemIsMovable);
-		pixmap->setPos(gateToDraw->GetTopLeft());
-
-		//pixmap.fromImage(gateToDraw->GetImage(), Qt::AutoColor);
-		//QPixmap::fromImage(const QImage & image, Qt::ImageConversionFlags flags = Qt::AutoColor)
-		//QBrush brush();
-
-		//item->setBrush(brush);
-		//item->setFlag(QGraphicsItem::ItemIsMovable);
+		pixmap->setPos(detectedGate->GetTopLeft());
 
 		m_scene->addItem(pixmap);
 	}
 
+	std::shared_ptr<KDTree> kdTree = std::make_shared<KDTree>(gatesPoints);
+
+	for (const auto& wire : detectedWires)
+	{
+		auto kdPoint1 = kdTree->nearest_point(wire.first);
+		auto kdPoint2 = kdTree->nearest_point(wire.second);
+		QPoint qPoint1(kdPoint1[0], kdPoint1[1]);
+		QPoint qPoint2(kdPoint2[0], kdPoint2[1]);
+
+
+	}
+
 	m_graphicsView->setScene(m_scene);
 }
+
+//size_t ImageParser::FindNearestGate(const point_t& point)
+//{
+//	auto kdPoint = m_kdTree->nearest_point(point);
+//	QPoint qPoint(kdPoint[0], kdPoint[1]);
+//
+//	for (const auto& gate : m_detectedGates)
+//	{
+//		const auto connectionPoints = gate->GetConnectionPoints();
+//		for (const auto& point : connectionPoints)
+//		{
+//			if (qPoint == point)
+//			{
+//				return gate->GetId();
+//			}
+//		}
+//	}
+//
+//	assert(false);
+//	return 0u;
+//}
 
 void ICDesigner::Display()
 {
