@@ -103,6 +103,7 @@
     <ClCompile Include="LogicalGates\Gate270.cpp" />
     <ClCompile Include="LogicalGates\Gate90.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="UI\CustomPixmap.cpp" />
     <QtRcc Include="ICImageProccesor.qrc" />
     <QtUic Include="ICImageProccesor.ui" />
     <ClCompile Include="Core\ICDesigner.cpp" />
@@ -115,6 +116,7 @@
     <ClInclude Include="LogicalGates\Gate180.h" />
     <ClInclude Include="LogicalGates\Gate270.h" />
     <ClInclude Include="LogicalGates\Gate90.h" />
+    <ClInclude Include="UI\CustomPixmap.h" />
     <QtMoc Include="ICImageProccesor.h" />
     <QtMoc Include="Core\ICDesigner.h" />
     <ClInclude Include="Core\ImageParser.h" />

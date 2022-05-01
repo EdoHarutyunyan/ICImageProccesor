@@ -10,44 +10,45 @@
 
 #include <iostream>
 #include <cassert>
+#include <qdebug.h>
 
 namespace
 {
-	static constexpr std::string_view and0ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\And0.jpg" };
-	static constexpr std::string_view nand0ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Nand0.jpg" };
-	static constexpr std::string_view or0ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Or0.jpg" };
-	static constexpr std::string_view nor0ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Nor0.jpg" };
-	static constexpr std::string_view xor0ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Xor0.jpg" };
-	static constexpr std::string_view xnor0ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Xnor0.jpg" };
-	static constexpr std::string_view not0ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Not0.jpg" };
-	static constexpr std::string_view buffer0ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Buffer0.jpg" };
+	static constexpr std::string_view and0ImgPath{ "./Resources/And0.jpg" };
+	static constexpr std::string_view nand0ImgPath{ "./Resources/Nand0.jpg" };
+	static constexpr std::string_view or0ImgPath{ "./Resources/Or0.jpg" };
+	static constexpr std::string_view nor0ImgPath{ "./Resources/Nor0.jpg" };
+	static constexpr std::string_view xor0ImgPath{ "./Resources/Xor0.jpg" };
+	static constexpr std::string_view xnor0ImgPath{ "./Resources/Xnor0.jpg" };
+	static constexpr std::string_view not0ImgPath{ "./Resources/Not0.jpg" };
+	static constexpr std::string_view buffer0ImgPath{ "./Resources/Buffer0.jpg" };
 
-	static constexpr std::string_view and90ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\And90.jpg" };
-	static constexpr std::string_view nand90ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Nand90.jpg" };
-	static constexpr std::string_view or90ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Or90.jpg" };
-	static constexpr std::string_view nor90ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Nor90.jpg" };
-	static constexpr std::string_view xor90ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Xor90.jpg" };
-	static constexpr std::string_view xnor90ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Xnor90.jpg" };
-	static constexpr std::string_view not90ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Not90.jpg" };
-	static constexpr std::string_view buffer90ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Buffer90.jpg" };
+	static constexpr std::string_view and90ImgPath{ "./Resources/And90.jpg" };
+	static constexpr std::string_view nand90ImgPath{ "./Resources/Nand90.jpg" };
+	static constexpr std::string_view or90ImgPath{ "./Resources/Or90.jpg" };
+	static constexpr std::string_view nor90ImgPath{ "./Resources/Nor90.jpg" };
+	static constexpr std::string_view xor90ImgPath{ "./Resources/Xor90.jpg" };
+	static constexpr std::string_view xnor90ImgPath{ "./Resources/Xnor90.jpg" };
+	static constexpr std::string_view not90ImgPath{ "./Resources/Not90.jpg" };
+	static constexpr std::string_view buffer90ImgPath{ "./Resources/Buffer90.jpg" };
 
-	static constexpr std::string_view and180ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\And180.jpg" };
-	static constexpr std::string_view nand180ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Nand180.jpg" };
-	static constexpr std::string_view or180ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Or180.jpg" };
-	static constexpr std::string_view nor180ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Nor180.jpg" };
-	static constexpr std::string_view xor180ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Xor180.jpg" };
-	static constexpr std::string_view xnor180ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Xnor180.jpg" };
-	static constexpr std::string_view not180ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Not180.jpg" };
-	static constexpr std::string_view buffer180ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Buffer180.jpg" };
+	static constexpr std::string_view and180ImgPath{ "./Resources/And180.jpg" };
+	static constexpr std::string_view nand180ImgPath{ "./Resources/Nand180.jpg" };
+	static constexpr std::string_view or180ImgPath{ "./Resources/Or180.jpg" };
+	static constexpr std::string_view nor180ImgPath{ "./Resources/Nor180.jpg" };
+	static constexpr std::string_view xor180ImgPath{ "./Resources/Xor180.jpg" };
+	static constexpr std::string_view xnor180ImgPath{ "./Resources/Xnor180.jpg" };
+	static constexpr std::string_view not180ImgPath{ "./Resources/Not180.jpg" };
+	static constexpr std::string_view buffer180ImgPath{ "./Resources/Buffer180.jpg" };
 
-	static constexpr std::string_view and270ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\And270.jpg" };
-	static constexpr std::string_view nand270ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Nand270.jpg" };
-	static constexpr std::string_view or270ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Or270.jpg" };
-	static constexpr std::string_view nor270ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Nor270.jpg" };
-	static constexpr std::string_view xor270ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Xor270.jpg" };
-	static constexpr std::string_view xnor270ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Xnor270.jpg" };
-	static constexpr std::string_view not270ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Not270.jpg" };
-	static constexpr std::string_view buffer270ImgPath{ "C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\Buffer270.jpg" };
+	static constexpr std::string_view and270ImgPath{ "./Resources/And270.jpg" };
+	static constexpr std::string_view nand270ImgPath{ "./Resources/Nand270.jpg" };
+	static constexpr std::string_view or270ImgPath{ "./Resources/Or270.jpg" };
+	static constexpr std::string_view nor270ImgPath{ "./Resources/Nor270.jpg" };
+	static constexpr std::string_view xor270ImgPath{ "./Resources/Xor270.jpg" };
+	static constexpr std::string_view xnor270ImgPath{ "./Resources/Xnor270.jpg" };
+	static constexpr std::string_view not270ImgPath{ "./Resources/Not270.jpg" };
+	static constexpr std::string_view buffer270ImgPath{ "./Resources/Buffer270.jpg" };
 } // namespace
 
 namespace parser
@@ -162,7 +163,6 @@ void ImageParser::DetectLines()
 	using namespace cv;
 
 	Mat imgGray;
-	Mat imgBlur;
 	Mat imgCanny;
 
 	cvtColor(m_image, imgGray, COLOR_BGR2GRAY);
@@ -248,9 +248,19 @@ void ImageParser::DetectLines()
 
 	for (auto& wire : wires)
 	{
-		m_wires.emplace_back(point_t(wire[0].first.x, wire[0].first.y),
-			point_t(wire.back().second.x, wire.back().second.y));
+		//qDebug() << wire[0].first << ", " << wire.back().second << std::endl;
+
+		//cv::circle(m_image, wire[0].first, 4, cv::Vec3b(0, 255, 0));
+		//cv::circle(m_image, wire.back().second, 4, cv::Vec3b(0, 255, 0));
+
+		point_t p1{ (double)wire[0].first.x, (double)wire[0].first.y };
+		point_t p2{ (double)wire.back().second.x, (double)wire.back().second.y };
+
+		m_wires.push_back({ p1, p2 });
 	}
+
+	//cv::imshow("aaaaaaaaaaaaaa", m_image);
+	//cv::waitKey(0);
 }
 
 std::vector<std::shared_ptr<gate::Gate>> ImageParser::GetGates() const

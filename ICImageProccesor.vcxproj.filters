@@ -21,6 +21,9 @@
     <Filter Include="Helpers">
       <UniqueIdentifier>{6f96da30-0e7f-4318-8862-b461f612d252}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{ce9e09e7-7f8e-43d0-bea1-42c0a54b8a64}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="ICImageProccesor.qrc">
@@ -57,6 +60,9 @@
     <ClCompile Include="Helpers\KDTree.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="UI\CustomPixmap.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Core\ICDesigner.h">
@@ -88,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="Helpers\KDTree.h">
       <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\CustomPixmap.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

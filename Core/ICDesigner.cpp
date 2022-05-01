@@ -1,4 +1,4 @@
-#include "ICDesigner.h"
+﻿#include "ICDesigner.h"
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
@@ -6,6 +6,9 @@
 #include <QGraphicsRectItem>
 #include <QPushButton>
 #include <QtWidgets/qfiledialog.h>
+#include <QBuffer>
+#include <QSaveFile>
+#include <QLabel>
 
 #include "../Core/ImageParser.h"
 
@@ -18,46 +21,51 @@ ICDesigner::ICDesigner(QWidget* parent)
 	, m_scene(new QGraphicsScene(this))
 	, m_importButton(new QPushButton("Import", this))
 	, m_exportButton(new QPushButton("Export", this))
+	, m_cleanButton(new QPushButton("Clean", this))
+	, m_andButton(new QPushButton())
+	, m_nandButton(new QPushButton())
+	, m_orButton(new QPushButton())
+	, m_norButton(new QPushButton())
+	, m_xorButton(new QPushButton())
+	, m_xnorButton(new QPushButton())
+	, m_bufferButton(new QPushButton())
+	, m_notButton(new QPushButton())
+	, m_wireButton(new QPushButton())
 {
-	QGridLayout* mainLayout = new QGridLayout();
-	mainLayout->addWidget(m_graphicsView, 0, 0, 10, 9);
-	mainLayout->addWidget(m_importButton, 0, 10, 1, 1);
-	mainLayout->addWidget(m_exportButton, 1, 10, 1, 1);
-
-	// ToDo: add logic gates buttons
-
-	setLayout(mainLayout);
+	Initialize();
 	showMaximized();
 	setWindowTitle("IC Image Proccessor");
 
-	// Test();
-
 	connect(m_importButton, SIGNAL(released()), this, SLOT(on_importButton_released()));
+	connect(m_exportButton, SIGNAL(released()), this, SLOT(on_exportButton_released()));
+	connect(m_andButton, SIGNAL(released()), this, SLOT(on_andButton_released()));
 }
 
-void ICDesigner::Test()
+void ICDesigner::on_exportButton_released()
 {
-	QRect rect(QPoint(0, 0), QSize(128, 72));
+	QString directory = QFileDialog::getExistingDirectory(this, "Choose the directory to export the image", QDir::homePath());
 
-	QImage image;
-	image.load("C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\Resources\\And.jpg");
-	auto newImg = image.scaled(rect.size());
-	//QRect rect(QPoint(0, 0), image.size());
-	//QRect rect(QPoint(0, 0), QSize(500, 500));
+	if (directory == "")
+	{
+		return;
+	}
+	QPixmap screen = QWidget::grab(QRect(QPoint(0,0), QSize(500, 500)));
 
-	QGraphicsRectItem* item = new QGraphicsRectItem(rect);
+	screen.save("saved.png");
+}
 
-	QBrush brush(newImg);
+void ICDesigner::on_andButton_released()
+{
+}
 
-	item->setBrush(brush);
-	item->setFlag(QGraphicsItem::ItemIsMovable);
-
-	m_scene->addItem(item);
-	m_graphicsView->setScene(m_scene);
+void ICDesigner::on_cleanButton_released()
+{
 }
 
 void ICDesigner::HandleParsedResult()
 {
+	m_scene->clear();
+
 	const auto detectedGates = m_parser->GetGates();
 	const auto detectedWires = m_parser->GetWires();
 
@@ -75,8 +83,19 @@ void ICDesigner::HandleParsedResult()
 		pixmap->setPixmap(QPixmap::fromImage(detectedGate->GetImage(), Qt::AutoColor));
 		pixmap->setFlag(QGraphicsItem::ItemIsMovable);
 		pixmap->setPos(detectedGate->GetTopLeft());
+		
+		//QGraphicsRectItem* rectitem = new QGraphicsRectItem(pixmap->boundingRect());
+		//rectitem->setPos(detectedGate->GetTopLeft());
 
 		m_scene->addItem(pixmap);
+		//m_scene->addItem(rectitem);
+	}
+
+	for (const auto& detectedWire : detectedWires)
+	{
+		QLine qline(QPoint(detectedWire.first[0], detectedWire.first[1]), QPoint(detectedWire.second[0], detectedWire.second[1]));
+		QGraphicsLineItem* line = new QGraphicsLineItem(qline);
+		m_scene->addItem(line);
 	}
 
 	//std::shared_ptr<KDTree> kdTree = std::make_shared<KDTree>(gatesPoints);
@@ -115,9 +134,64 @@ void ICDesigner::HandleParsedResult()
 //	return 0u;
 //}
 
-void ICDesigner::Display()
+void ICDesigner::Initialize()
 {
-	// Todo m_scene->clear();
+	QGridLayout* mainLayout = new QGridLayout();
+	mainLayout->addWidget(m_graphicsView, 0, 0, 15, 9);
+	mainLayout->addWidget(m_importButton, 0, 10, 1, 1);
+	mainLayout->addWidget(m_exportButton, 1, 10, 1, 1);
+	mainLayout->addWidget(m_cleanButton, 2, 10, 1, 1);
+
+	QFrame* line = new QFrame();
+	line->setGeometry(QRect(/* ... */));
+	line->setFrameShape(QFrame::HLine); // Replace by VLine for vertical line
+	line->setFrameShadow(QFrame::Sunken);
+	mainLayout->addWidget(line, 3, 10, 1, 1);
+
+	// ToDo: add group names
+	//QLabel* gatesLabel = new QLabel("Gates", this);
+
+	//mainLayout->addWidget(gatesLabel, 2, 10, 1, 1, Qt::AlignCenter);
+
+	SetButton(*m_andButton, "./Icons/Icon_And.jpg", 102, 53);
+	SetButton(*m_nandButton, "./Icons/Icon_Nand.jpg", 102, 53);
+	SetButton(*m_orButton, "./Icons/Icon_Or.jpg", 102, 53);
+	SetButton(*m_norButton, "./Icons/Icon_Nor.jpg", 102, 53);
+	SetButton(*m_xorButton, "./Icons/Icon_Xor.jpg", 102, 53);
+	SetButton(*m_xnorButton, "./Icons/Icon_Xnor.jpg", 102, 53);
+	SetButton(*m_bufferButton, "./Icons/Icon_Buffer.jpg", 102, 60);
+	SetButton(*m_notButton, "./Icons/Icon_Not.jpg", 102, 65);
+
+	mainLayout->addWidget(m_andButton, 5, 10, 1, 1);
+	mainLayout->addWidget(m_nandButton, 6, 10, 1, 1);
+	mainLayout->addWidget(m_orButton, 7, 10, 1, 1);
+	mainLayout->addWidget(m_norButton, 8, 10, 1, 1);
+	mainLayout->addWidget(m_xorButton, 9, 10, 1, 1);
+	mainLayout->addWidget(m_xnorButton, 10, 10, 1, 1);
+	mainLayout->addWidget(m_bufferButton, 11, 10, 1, 1);
+	mainLayout->addWidget(m_notButton, 12, 10, 1, 1);
+
+	QFrame* line2 = new QFrame();
+	line2->setGeometry(QRect(/* ... */));
+	line2->setFrameShape(QFrame::HLine); // Replace by VLine for vertical line
+	line2->setFrameShadow(QFrame::Sunken);
+	mainLayout->addWidget(line2, 13, 10, 1, 1);
+
+	SetButton(*m_wireButton, "./Icons/Icon_Line.png", 102, 102);
+	mainLayout->addWidget(m_wireButton, 14, 10, 1, 1);
+
+	setLayout(mainLayout);
+}
+
+void ICDesigner::SetButton(QPushButton& button, const std::string& iconPath, const size_t width, const size_t height)
+{
+	button.setFixedWidth(width);
+	button.setFixedHeight(height);
+
+	QPixmap andPixmap(iconPath.c_str());
+	QIcon andIcon(andPixmap);
+	button.setIcon(andIcon);
+	button.setIconSize(andPixmap.rect().size());
 }
 
 void ICDesigner::on_importButton_released()
@@ -125,7 +199,7 @@ void ICDesigner::on_importButton_released()
 	//QString fileName = QFileDialog::getOpenFileName(this, "Open a file", QDir::homePath());
 
 	// ToDo: file path should be input parameter
-	m_parser = std::make_shared<parser::ImageParser>("C:\\Users\\eharutyunyan\\Desktop\\Tesis\\ICImageProccesor\\test_1.jpg");
+	m_parser = std::make_shared<parser::ImageParser>("./test_1.jpg");
 	m_parser->Start(std::bind([this]()
 		{
 			HandleParsedResult();
